@@ -4,6 +4,7 @@ from app.core.config import settings
 
 uri = settings.DataBase_url
 client = AsyncIOMotorClient(uri)
+db = client.ilmhub
 
 async def connect_to_mongo():
     try:
