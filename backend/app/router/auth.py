@@ -39,3 +39,4 @@ async def User_login(Payload: UserLogin):
 
     return {"access_token": create_access_token(user["email"], user["role"]), "token_type": "bearer"}
 
+

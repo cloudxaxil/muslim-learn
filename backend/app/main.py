@@ -2,7 +2,8 @@ from typing import Union
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.core.database import client
-from app.router.auth import router
+from app.router.auth import router as auth_router
+from app.router.quran_api import router as quran_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -18,7 +19,8 @@ async def lifespan(app: FastAPI):
     print("Application shutting down...")
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(router, prefix="/api/auth")
+app.include_router(auth_router, prefix="/api/auth")
+app.include_router(quran_router, prefix="/api/quran")
 
 @app.get("/health")
 
