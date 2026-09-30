@@ -20,3 +20,13 @@ async def get_surah_ayahs(surah_number: int):
     for surah in ayahs:
             surah.pop("_id")
     return ayahs
+
+
+
+@router.get("/audio/{reciter}/{surah_number}")
+
+async def get_surah_recitation(surah_number : int, reciter: str):
+
+    audio_url =   f"https://cdn.islamic.network/quran/audio-surah/128/{reciter}/{surah_number}.mp3"
+
+    return {"audio_url": audio_url} 

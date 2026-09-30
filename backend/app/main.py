@@ -16,7 +16,7 @@ async def lifespan(app: FastAPI):
     yield  # App is ready to handle requests
 
     # Shutdown: run after requests
-    await client.close()
+    client.close()
     print("Application shutting down...")
 
 app = FastAPI(lifespan=lifespan)
