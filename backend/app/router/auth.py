@@ -7,7 +7,6 @@ from fastapi import HTTPException
 from app.core.security import  verify_password
 from app.core.security import create_access_token
 
-
 router = APIRouter()
 
 users_collection = db.users
@@ -38,5 +37,6 @@ async def User_login(Payload: UserLogin):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     return {"access_token": create_access_token(user["email"], user["role"]), "token_type": "bearer"}
+
 
 
