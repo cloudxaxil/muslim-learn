@@ -30,3 +30,23 @@ async def get_surah_recitation(surah_number : int, reciter: str):
     audio_url =   f"https://cdn.islamic.network/quran/audio-surah/128/{reciter}/{surah_number}.mp3"
 
     return {"audio_url": audio_url} 
+
+#find specific ayah
+@router.get("/search")
+async def search_ayahs(q: str):
+    ayahs = await ayahs_collection.find({
+        "translation_english": {"$regex": q, "$options": "i"}
+    }).to_list(length=None)
+    for ayah in ayahs:
+        ayah.pop("_id")
+    return ayahs
+
+# find  specific surah 
+@router.get("/search/surahs") 
+async def search_surahs(q: str): 
+    surahs = await surahs_collection.find({
+        "name_english": {"$regex": q, "$options": "i"}
+    }).to_list(length=None)
+    for surah in surahs:
+        surah.pop("_id")
+    return surahs
